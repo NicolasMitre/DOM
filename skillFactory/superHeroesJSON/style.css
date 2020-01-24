@@ -1,0 +1,27 @@
+#superHeroOne {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 50%;
+}
+#superHeroTwo {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border-radius: 50%;
+}
+#superHeroThree {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+body {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+div:hover {
+  cursor: pointer;
+}
