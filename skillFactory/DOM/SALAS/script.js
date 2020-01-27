@@ -1,33 +1,16 @@
-var usuarios = [
-  {
-    nombre: "nico",
-    mail: "nico@gmail.com",
-    edad: 21
-  },
-  {
-    nombre: "servio luvoni",
-    mail: "geek@hotmail.com",
-    edad: 58
-  },
-  {
-    nombre: "Mario Bros",
-    mail: "sorry@castle.com",
-    edad: 12
-  },
-  {
-    nombre: "ben",
-    mail: "alien@outlook.com",
-    edad: 10
-  }
-];
-
 document.addEventListener("DOMContentLoaded", function() {
-  cargarUsuariosPredeterminados(usuarios);
+  readJson()
+    .then(function(data) {
+      cargarUsuariosPredeterminados(data);
+    })
+    .catch(function(e) {
+      console.error("no se encuentra el archivo json" + e);
+    });
   document
     .getElementById("formulario")
     .addEventListener("submit", function(evento) {
       evento.preventDefault();
-      clickeado();
+      requestForm();
       evento.target.reset();
     });
 });
@@ -83,7 +66,7 @@ function asignarLista(lista) {
     tabla.appendChild(fila);
   }
 }
-function clickeado() {
+function requestForm() {
   usuarios = [];
   const name = document.getElementById("nombre").value;
   const ce = document.getElementById("email").value;
@@ -91,4 +74,17 @@ function clickeado() {
   usuarios.push({ nombre: name, mail: ce, edad: age });
 
   cargarUsuariosPredeterminados(usuarios);
+}
+
+async function readJson() {
+  try {
+    config = {
+      method: "GET"
+    };
+    var response = await fetch("users.json", config);
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 }
